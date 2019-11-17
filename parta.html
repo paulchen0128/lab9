@@ -1,0 +1,74 @@
+<html lang="en">
+
+<head>
+    <style>
+        .button {
+            position: absolute;
+            height: 5em;
+            width: 10em;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <input type="text" id="box">
+    <input type="button" id="button" value="Go!">
+
+    <script>
+        document.getElementById("button").onclick = readbox;
+
+        function readbox() {
+            let box = document.getElementById("box").value;
+            if (box > 100) {
+                alert('Number must be under 100')
+            } else if (box < 4) {
+                alert('Number must be greater than 5')
+            } else if (isNaN(box)) {
+                alert('Only number please')
+            } else {
+                console.log(box);
+                return box
+            }
+        }
+
+        function createbutton(num) {
+            for (i = 0; i < num; i++) {
+                let butt = new Button();
+                console.log(butt.DOMobj)
+                setTimeout( function () { butt.DOMobj.style.background = butt.color}, 1);
+                setInterval( function () { move(butt.DOMobj) }, 2000)
+            }
+        }
+
+        
+        function Button() {
+            let r = Math.random() * 256;
+            let g = Math.random() * 256;
+            let b = Math.random() * 256;
+            this.color = 'rgb(' +r + ", " + g + ', ' + b +')';
+            this.DOMobj = document.createElement('Button');
+            this.DOMobj.className = 'button';
+            this.DOMobj.style.width = "10em";
+            this.DOMobj.style.height = "5em";
+            document.body.appendChild(this.DOMobj);
+        }
+
+        function move(butt) {
+            let z = window.innerWidth - 128;
+            let c = window.innerHeight - 128;
+            let x = Math.random() * z;
+            let y = Math.random() * c;
+            console.log(x, y, z, c)
+            butt.style.top = y + 'px';
+            butt.style.left = x + 'px';
+        }
+
+        document.getElementById('button').onclick = function () { createbutton(readbox()) };
+
+    </script>
+
+</body>
+
+</html>
